@@ -211,6 +211,7 @@ Log-log 图的趋势分析表明，部分变量的分组间生存曲线未保持
 - 模型系数图显示各变量对生存时间的影响
 
 ![2025-04-10-03-54-48-image.png](https://github.com/lelel-hue/STA323_Project1/raw/main/_image/AFT.png)
+![2025-04-10-03-54-48-image.png](https://github.com/lelel-hue/STA323_Project1/raw/main/_image/CI_2.png)
 
 **假设检验**：通过Kaplan-Meier方法绘制log-odds图验证模型假设
 
