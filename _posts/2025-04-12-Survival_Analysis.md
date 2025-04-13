@@ -1,3 +1,7 @@
+---
+title: "Research on Customer Churn Based on Survival Analysis"
+date: 2025-04-12
+---
 # 《基于生存分析的客户流失研究》
 
 ## 一、引言
@@ -19,7 +23,7 @@
 
 数据示例如下：
 
-![](file://C:\Users\Lenovo\AppData\Roaming\marktext\images\2025-04-10-10-57-33-image.png?msec=1744253853145)
+![](C:\Users\Lenovo\AppData\Roaming\marktext\images\2025-04-10-10-57-33-image.png)
 
 ### （三）PySpark 创建和管理数据库及表
 
@@ -76,14 +80,13 @@ kmf.fit(T, C)
 
 绘制全体客户的 Kaplan-Meier 生存曲线如下，其中中位生存时间为34个月:
 
-![](file:///C:/Users/Lenovo/AppData/Roaming/marktext/images/2025-04-10-11-31-09-image.png?msec=1744255874632)
+<img src="file:///C:/Users/Lenovo/AppData/Roaming/marktext/images/2025-04-10-11-31-09-image.png" title="" alt="" width="354">
 
 - 全体客户的 Kaplan-Meier 生存曲线显示，客户的生存概率随时间逐渐降低，这表明客户流失是一个随着时间推移而逐渐增加的现象。
-  
+
 - 中位生存时间的计算结果为34个月，说明在样本数据中，大约有一半的客户在34个月内发生流失。
-  
+
 - 生存概率曲线周围的浅蓝色边框表示置信区间。区间越宽，置信度越低。如图所示，随着时间线的延长，估计值的置信度会下降。
-  
 
 ### （二）Log-rank 检验
 
@@ -91,11 +94,11 @@ kmf.fit(T, C)
 
 在本研究中，分别对性别、合同类型等协变量进行了 Log-rank 检验。
 
-![](file://C:\Users\Lenovo\AppData\Roaming\marktext\images\2025-04-10-11-53-47-image.png?msec=1744257227601)
+![](C:\Users\Lenovo\AppData\Roaming\marktext\images\2025-04-10-11-53-47-image.png)
 
-![](file://C:\Users\Lenovo\AppData\Roaming\marktext\images\2025-04-10-11-54-10-image.png?msec=1744257250463)
+![](C:\Users\Lenovo\AppData\Roaming\marktext\images\2025-04-10-11-54-10-image.png)
 
-![](file://C:\Users\Lenovo\AppData\Roaming\marktext\images\2025-04-10-11-54-36-image.png?msec=1744257276092)
+![](C:\Users\Lenovo\AppData\Roaming\marktext\images\2025-04-10-11-54-36-image.png)
 
 通过对性别、合同类型等协变量进行 Log-rank 检验，可以评估这些因素对客户流失的影响。例如，性别对客户流失的影响不显著，表明在本研究的数据集中，男性和女性客户的流失模式没有显著差异。然而，合同类型对客户流失的影响显著，这表明不同合同类型的客户在流失概率上存在差异。例如，选择月付合同的客户流失概率可能高于选择长期合同的客户。这一结果提示企业在制定客户保留策略时，应考虑合同类型这一因素，针对不同合同类型的客户采取不同的保留措施。
 
@@ -121,18 +124,17 @@ print(surv_df)
 
 可以得到：
 
-![](file:///C:/Users/Lenovo/AppData/Roaming/marktext/images/2025-04-10-11-56-53-image.png?msec=1744257416803)
+<img src="file:///C:/Users/Lenovo/AppData/Roaming/marktext/images/2025-04-10-11-56-53-image.png" title="" alt="" width="324">
 
 ## 四、Cox Proportional Hazards模型
 
 - 与 Kaplan-Meier 相比，Cox 比例风险可用于多变量分析。与 Kaplan-Meier 类似，Cox 比例风险模型也可用于绘制生存概率曲线，但其数学计算方法有所不同。由于会根据其他协变量进行调整，因此结果被称为调整生存概率曲线。
-  
+
 - Kaplan-Meier 法用于估计生存概率，而 Cox 比例风险法用于估计风险比。风险比表示两个个体（或群体）之间存在的风险差异。风险本质上是生存概率的倒数，或者说是失败概率。
-  
+
 - Cox 比例风险方程指出风险比是两个项的乘积：基线风险 (Baseline Hazard) 和部分风险 (Partial Hazard)。
-  
+
 - 部分风险表示当变量值与基线不同时，风险发生的变化。在任何给定时间，零个或多个变量可能包含与基线不同的值。风险变化是参数/变量的线性组合。
-  
 
 ### （一）Cox 比例风险模型
 
@@ -145,7 +147,7 @@ cph.fit(survival_pd_03, 'tenure', 'churn')
 
 拟合结果如下：
 
-![](file://C:\Users\Lenovo\AppData\Roaming\marktext\images\2025-04-10-12-13-39-image.png?msec=1744258419873)
+![](C:\Users\Lenovo\AppData\Roaming\marktext\images\2025-04-10-12-13-39-image.png)
 
 - **拟合优度**：模型共使用 3351 条记录，其中 1556 条记录表明客户发生了流失事件。模型的对数似然值（log-likelihood）为 -11315.95，部分 AIC 为 22639.90。
 - **重要变量和显著性**：
@@ -155,7 +157,7 @@ cph.fit(survival_pd_03, 'tenure', 'churn')
   - `techSupport_Yes`：HR = 0.53，表明使用技术支持服务的客户流失风险显著降低。
 - 绘制变量的置信区间：
 
-![](file://C:\Users\Lenovo\AppData\Roaming\marktext\images\2025-04-10-12-05-06-image.png?msec=1744257906960)
+![](C:\Users\Lenovo\AppData\Roaming\marktext\images\2025-04-10-12-05-06-image.png)
 
 通过置信区间图可以看出，所有变量的风险比置信区间均未跨越 1，表明这些变量对流失风险的影响是统计显著的。
 
@@ -165,58 +167,60 @@ cph.fit(survival_pd_03, 'tenure', 'churn')
 
 - 方法一：统计检验
 
-![](file:///C:/Users/Lenovo/AppData/Roaming/marktext/images/2025-04-10-12-18-22-image.png?msec=1744258706384)
+<img src="file:///C:/Users/Lenovo/AppData/Roaming/marktext/images/2025-04-10-12-18-22-image.png" title="" alt="" width="286">
 
 就此模型而言，我们发现四个变量中有三个违反了比例风险假设。
 
 - 方法 2：Schoenfield 残差：利用图形输出来评估情况。
 
-![](file://C:\Users\Lenovo\AppData\Roaming\marktext\images\2025-04-10-12-26-20-image.png?msec=1744259180371)
+![](C:\Users\Lenovo\AppData\Roaming\marktext\images\2025-04-10-12-26-20-image.png)
 
 Schoenfeld 残差图显示部分变量残差随时间变化不稳定，进一步验证了比例风险假设的违背。
 
 - 方法 3：Log-log Kaplan-Meier 图：基于Kaplan-Meier 曲线进行对数-对数变换
 
-![](file://C:\Users\Lenovo\AppData\Roaming\marktext\images\2025-04-10-12-29-00-image.png?msec=1744259340285)
+![](C:\Users\Lenovo\AppData\Roaming\marktext\images\2025-04-10-12-29-00-image.png)
 
 Log-log 图的趋势分析表明，部分变量的分组间生存曲线未保持平行，进一步支持了假设违背的结论。除了 `internetService` 变量以外，大部分变量在 log(timeline) 值介于 1 和 3 之间时，Kaplan-Meier 曲线大体上是平行的；但当 log(timeline) 小于 1 或大于 3 时，这种平行关系开始减弱。
 
 ### 五、Accelerated Failure Time
 
-本部分使用Accelerated Failure Time (AFT)模型分析电信客户流失问题，重点考察客户留存时间(tenure)与多种协变量的关系。采用Log-Logistic分布拟合生存时间数据。
+本部分使用Accelerated Failure Time (AFT)模型分析电信客户流失问题，重点考察客户留存时间(tenure)与多种协变量的关系。采用Log-Logistic分布拟合生存时间数据。 
 
 ### （一）数据处理
 
-1. 数据加载：从Spark表`telco_silver`加载银级处理后的数据
-  
-2. 特征编码：对8个分类变量进行one-hot编码（如partner、internetService等）
-  
-3. 数据选择：选取关键变量构建分析数据集，包括：
-  
-  - 目标变量：tenure（客户在网时长）和churn（是否流失）
-    
-  - 预测变量：如partner_Yes、techSupport_Yes等共11个特征
-    
+1. 数据加载：从Spark表`telco_silver`加载银级处理后的数据 
+
+2. 特征编码：对8个分类变量进行one-hot编码（如partner、internetService等） 
+
+3. 数据选择：选取关键变量构建分析数据集，包括： 
+   
+   - 目标变量：tenure（客户在网时长）和churn（是否流失） 
+   
+   - 预测变量：如partner_Yes、techSupport_Yes等共11个特征
 
 ### （二）关键分析步骤
 
-   1. **数据修正**：将tenure中的非正值替换为极小值(1e-6)
+   1. **数据修正**：将tenure中的非正值替换为极小值(1e-6) 
 
-2. **模型拟合**：使用LogLogisticAFTFitter拟合AFT模型
-  
-3. **结果解释**：
-  
+2. **模型拟合**：使用LogLogisticAFTFitter拟合AFT模型 
 
-- 中位生存时间为135.51
-  
+3. **结果解释**： 
+- 中位生存时间为135.51 
+
 - 模型系数图显示各变量对生存时间的影响
-  
+
+![2025-04-10-03-54-48-image.png](C:\Users\SkyLYnf\Desktop\SUR-report\2025-04-10-03-54-48-image.png)
 
 **假设检验**：通过Kaplan-Meier方法绘制log-odds图验证模型假设
 
+![2025-04-10-03-54-16-image.png](C:\Users\SkyLYnf\Desktop\SUR-report\2025-04-10-03-54-16-image.png)
+
+![2025-04-10-03-54-01-image.png](C:\Users\SkyLYnf\Desktop\SUR-report\2025-04-10-03-54-01-image.png)
+
 ### （三）主要发现
 
-- 模型摘要显示技术支持和在线安全服务等变量显著影响客户留存
+- 模型摘要显示技术支持和在线安全服务等变量显著影响客户留存 
 - log-odds图验证了不同协变量组的生存曲线差异
 
 ### 六、Customer Lifetime Value
@@ -232,16 +236,21 @@ Log-log 图的趋势分析表明，部分变量的分组间生存曲线未保持
 ### （二）关键分析步骤
 
 1. **模型构建**：使用CoxPHFitter拟合比例风险模型
-  
+
 2. **价值预测**：
-  
-  - 基于模型预测生存概率曲线
-  
-  - 假设每月利润为30单位，计算净现值(NPV)
+   
+   - 基于模型预测生存概率曲线
+   
+   <img src="file:///C:/Users/SkyLYnf/Desktop/SUR-report/1744271130584.jpg" title="" alt="1744271130584.jpg" width="407">
+   
+   - 假设每月利润为30单位，计算净现值(NPV)
+
 3. **可视化展示**：
-  
-  - 生成包含25个月详细数据的回收期表
-  - 绘制关键时间点(12/24/36个月)的累计NPV柱状图
+   
+   - 生成包含25个月详细数据的回收期表
+   - 绘制关键时间点(12/24/36个月)的累计NPV柱状图
+
+<img src="file:///C:/Users/SkyLYnf/Desktop/SUR-report/1744271137038.jpg" title="" alt="1744271137038.jpg" width="417">
 
 ### （三）主要发现
 
@@ -250,19 +259,19 @@ Log-log 图的趋势分析表明，部分变量的分组间生存曲线未保持
 - 累计NPV分析提供不同合同期限的投资回报评估
 
 用于 Cox 模型拟合的数据集前 5 行：
- churn tenure dependents_Yes internetService_DSL onlineBackup_Yes \
-0 0.0 1.0 False True True  
-1 1.0 2.0 False True True  
-2 1.0 2.0 False False False  
-3 1.0 8.0 False False False  
-4 0.0 22.0 True False True
+  churn  tenure  dependents_Yes  internetService_DSL  onlineBackup_Yes  \
+0   0.0     1.0           False                 True              True   
+1   1.0     2.0           False                 True              True   
+2   1.0     2.0           False                False             False   
+3   1.0     8.0           False                False             False   
+4   0.0    22.0            True                False              True   
 
-techSupport_Yes  
-0 False  
-1 False  
-2 False  
-3 False  
-4 False
+   techSupport_Yes  
+0            False  
+1            False  
+2            False  
+3            False  
+4            False  
 
 ### （四）交互功能
 
@@ -273,7 +282,9 @@ techSupport_Yes
 
 ### 七、总结
 
-### 案例1：模糊的行业筛选
+Q3生成
+
+### ** 案例1：模糊的行业筛选**
 
 **数据库结构：**
 
@@ -286,7 +297,7 @@ CREATE TABLE ResponsibilityReports (
 );
 ```
 
-**用户问题：** "列出2022年所有科技公司的报告"
+**用户问题：**  "列出2022年所有科技公司的报告"
 
 **LLM生成的错误SQL：**
 
@@ -311,9 +322,9 @@ AND url LIKE '%2022%';
 
 ### **案例2：股票代码查询URL**
 
-**数据库结构：**
+**数据库结构：** 
 
-**用户问题：** "查找股票代码为BLKB的公司的ESG报告URL"
+**用户问题：**  "查找股票代码为BLKB的公司的ESG报告URL"
 
 **LLM生成的错误SQL：**
 
