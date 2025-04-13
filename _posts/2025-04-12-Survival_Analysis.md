@@ -1,3 +1,7 @@
+---
+title: "Research on Customer Churn Based on Survival Analysis"
+date: 2025-04-12
+---
 # 《基于生存分析的客户流失研究》
 
 ## 一、引言
