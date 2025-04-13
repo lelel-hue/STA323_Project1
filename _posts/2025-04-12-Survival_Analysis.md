@@ -210,13 +210,13 @@ Log-log 图的趋势分析表明，部分变量的分组间生存曲线未保持
 
 - 模型系数图显示各变量对生存时间的影响
 
-![2025-04-10-03-54-48-image.png](C:\Users\SkyLYnf\Desktop\SUR-report\2025-04-10-03-54-48-image.png)
+![2025-04-10-03-54-48-image.png](../_image/2025-04-10-03-54-48-image.png)
 
 **假设检验**：通过Kaplan-Meier方法绘制log-odds图验证模型假设
 
-![2025-04-10-03-54-16-image.png](C:\Users\SkyLYnf\Desktop\SUR-report\2025-04-10-03-54-16-image.png)
+![2025-04-10-03-54-16-image.png](../_image/2025-04-10-03-54-16-image.png)
 
-![2025-04-10-03-54-01-image.png](C:\Users\SkyLYnf\Desktop\SUR-report\2025-04-10-03-54-01-image.png)
+![2025-04-10-03-54-01-image.png](../_image/2025-04-10-03-54-01-image.png)
 
 ### （三）主要发现
 
@@ -241,7 +241,7 @@ Log-log 图的趋势分析表明，部分变量的分组间生存曲线未保持
    
    - 基于模型预测生存概率曲线
    
-   <img src="file:///C:/Users/SkyLYnf/Desktop/SUR-report/1744271130584.jpg" title="" alt="1744271130584.jpg" width="407">
+   <img src="../_image/1744271130584.jpg" title="" alt="1744271130584.jpg" width="407">
    
    - 假设每月利润为30单位，计算净现值(NPV)
 
@@ -250,7 +250,7 @@ Log-log 图的趋势分析表明，部分变量的分组间生存曲线未保持
    - 生成包含25个月详细数据的回收期表
    - 绘制关键时间点(12/24/36个月)的累计NPV柱状图
 
-<img src="file:///C:/Users/SkyLYnf/Desktop/SUR-report/1744271137038.jpg" title="" alt="1744271137038.jpg" width="417">
+<img src="../_image/1744271137038.jpg" title="" alt="1744271137038.jpg" width="417">
 
 ### （三）主要发现
 
@@ -282,100 +282,3 @@ Log-log 图的趋势分析表明，部分变量的分组间生存曲线未保持
 
 ### 七、总结
 
-Q3生成
-
-### ** 案例1：模糊的行业筛选**
-
-**数据库结构：**
-
-```
-CREATE TABLE ResponsibilityReports (
-    sector VARCHAR(255),
-    organization VARCHAR(255),
-    ticker VARCHAR(10),
-    url VARCHAR(255)
-);
-```
-
-**用户问题：**  "列出2022年所有科技公司的报告"
-
-**LLM生成的错误SQL：**
-
-```
-SELECT * FROM ResponsibilityReports 
-WHERE sector = 'Technology' AND url LIKE '%2022%';
-```
-
-**正确SQL：**
-
-```
-SELECT * FROM ResponsibilityReports 
-WHERE sector = 'Technology companies' 
-AND url LIKE '%2022%';
-```
-
-**LLM失败原因：**
-
-1. **对字段值的误解**：实际数据中行业字段值为 `'Technology companies'`，而非 `'Technology'`。
-2. **时间推理不足**：需理解URL中包含年份模式（如 `_2022.pdf`），但未正确提取。
-3. **未严格匹配字段值**：直接使用自然语言中的缩写（"科技公司" vs. 实际存储的完整值）。
-
-### **案例2：股票代码查询URL**
-
-**数据库结构：** 
-
-**用户问题：**  "查找股票代码为BLKB的公司的ESG报告URL"
-
-**LLM生成的错误SQL：**
-
-```
-SELECT url FROM ResponsibilityReports 
-WHERE ticker = 'BLKB' LIMIT 1;
-```
-
-**正确SQL：**
-
-```
-SELECT url FROM ResponsibilityReports 
-WHERE ticker = 'BLKB' 
-AND sector = 'Technology companies';
-```
-
-**LLM失败原因：**
-
-1. **未考虑潜在重复**：假设股票代码（`ticker`）全局唯一，但未来数据扩展可能导致跨行业重复。
-2. **防御性设计缺失**：未添加行业筛选条件，尽管当前数据中无重复。
-3. **符号大小写敏感性**：未明确处理字段值的大小写（例如 `'BLKB'` vs. `'blkb'`）。
-
-### **常见失败模式分析**
-
-1. **字面翻译陷阱**：直接将自然语言词汇（如“科技”）映射到字段值，忽略实际存储内容。
-2. **时间推理缺陷**：无法从URL等隐含字段中提取年份信息。
-3. **模式识别不足**：对URL结构中的关键模式（如 `_2022.pdf`）缺乏解析能力。
-4. **防御性设计缺失**：未考虑未来数据扩展可能导致的逻辑漏洞（如跨行业股票代码重复）。
-
-### **优化建议**
-
-改进数据库设计可减少LLM误解，例如：
-
-```
-CREATE TABLE Reports (
-    report_year INT,
-    sector VARCHAR(255),
-    organization VARCHAR(255),
-    ticker VARCHAR(10),
-    url VARCHAR(255)
-);
-```
-
-通过显式添加 `report_year` 字段，简化时间筛选逻辑，同时提高数据可解释性。
-
-### **总结**
-
-LLM在生成SQL时可能因以下原因失败：
-
-- **数据-模式脱节**：未严格对齐自然语言描述与数据库实际存储值。
-- **隐含模式处理**：对URL、编码字段等复杂模式的解析能力有限。
-- **防御性逻辑缺失**：未预判数据扩展带来的潜在问题。
-
-通过优化数据库设计（如显式字段分离）和精细化提示工程（明确字段值示例），可显著提升LLM生成SQL的准确性。
