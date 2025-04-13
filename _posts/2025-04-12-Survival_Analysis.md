@@ -233,6 +233,8 @@ Log-log 图的趋势分析表明，部分变量的分组间生存曲线未保持
 2. 特征编码：对5个分类变量进行one-hot编码（如dependents、techSupport等）
 3. 数据选择：构建包含churn、tenure等6个关键变量的分析数据集
 
+<img src="https://github.com/lelel-hue/STA323_Project1/raw/main/_image/6_cox_data.png" title="" alt="" width="574">
+
 ### （二）关键分析步骤
 
 1. **模型构建**：使用CoxPHFitter拟合比例风险模型
@@ -258,20 +260,6 @@ Log-log 图的趋势分析表明，部分变量的分组间生存曲线未保持
 - 生存概率曲线显示典型客户留存模式
 - 累计NPV分析提供不同合同期限的投资回报评估
 
-用于 Cox 模型拟合的数据集前 5 行：
-  churn  tenure  dependents_Yes  internetService_DSL  onlineBackup_Yes  \
-0   0.0     1.0           False                 True              True   
-1   1.0     2.0           False                 True              True   
-2   1.0     2.0           False                False             False   
-3   1.0     8.0           False                False             False   
-4   0.0    22.0            True                False              True   
-
-   techSupport_Yes  
-0            False  
-1            False  
-2            False  
-3            False  
-4            False  
 
 ### （四）交互功能
 
@@ -280,5 +268,5 @@ Log-log 图的趋势分析表明，部分变量的分组间生存曲线未保持
 - 客户特征：如是否有家属、是否使用技术支持等
 - 财务参数：内部收益率(默认10%)
 
-### 七、总结
+![](https://github.com/lelel-hue/STA323_Project1/raw/main/_image/example.png)
 
