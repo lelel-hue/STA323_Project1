@@ -23,7 +23,7 @@ date: 2025-04-12
 
 数据示例如下：
 
-![](https://github.com/lelel-hue/STA323_Project1/blob/main/_image/Q2_DataOverview.png)
+![](https://github.com/lelel-hue/STA323_Project1/raw/main/_image/Q2_DataOverview.png)
 
 ### （三）PySpark 创建和管理数据库及表
 
@@ -80,7 +80,7 @@ kmf.fit(T, C)
 
 绘制全体客户的 Kaplan-Meier 生存曲线如下，其中中位生存时间为34个月:
 
-<img src="https://github.com/lelel-hue/STA323_Project1/blob/main/_image/population_level.png" title="" alt="" width="354">
+<img src="https://github.com/lelel-hue/STA323_Project1/raw/main/_image/population_level.png" title="" alt="" width="354">
 
 - 全体客户的 Kaplan-Meier 生存曲线显示，客户的生存概率随时间逐渐降低，这表明客户流失是一个随着时间推移而逐渐增加的现象。
 
@@ -94,11 +94,11 @@ kmf.fit(T, C)
 
 在本研究中，分别对性别、合同类型等协变量进行了 Log-rank 检验。
 
-![](https://github.com/lelel-hue/STA323_Project1/blob/main/_image/KMCurve1.png)
+![](https://github.com/lelel-hue/STA323_Project1/raw/main/_image/KMCurve1.png)
 
-![](https://github.com/lelel-hue/STA323_Project1/blob/main/_image/KMCurve2.png)
+![](https://github.com/lelel-hue/STA323_Project1/raw/main/_image/KMCurve2.png)
 
-![](https://github.com/lelel-hue/STA323_Project1/blob/main/_image/KMCurve3.png)
+![](https://github.com/lelel-hue/STA323_Project1/raw/main/_image/KMCurve3.png)
 
 通过对性别、合同类型等协变量进行 Log-rank 检验，可以评估这些因素对客户流失的影响。例如，性别对客户流失的影响不显著，表明在本研究的数据集中，男性和女性客户的流失模式没有显著差异。然而，合同类型对客户流失的影响显著，这表明不同合同类型的客户在流失概率上存在差异。例如，选择月付合同的客户流失概率可能高于选择长期合同的客户。这一结果提示企业在制定客户保留策略时，应考虑合同类型这一因素，针对不同合同类型的客户采取不同的保留措施。
 
@@ -124,7 +124,7 @@ print(surv_df)
 
 可以得到：
 
-<img src="https://github.com/lelel-hue/STA323_Project1/blob/main/_image/survival.png" title="" alt="" width="324">
+<img src="https://github.com/lelel-hue/STA323_Project1/raw/main/_image/survival.png" title="" alt="" width="324">
 
 ## 四、Cox Proportional Hazards模型
 
@@ -147,7 +147,7 @@ cph.fit(survival_pd_03, 'tenure', 'churn')
 
 拟合结果如下：
 
-![](https://github.com/lelel-hue/STA323_Project1/blob/main/_image/COX.png)
+![](https://github.com/lelel-hue/STA323_Project1/raw/main/_image/COX.png)
 
 - **拟合优度**：模型共使用 3351 条记录，其中 1556 条记录表明客户发生了流失事件。模型的对数似然值（log-likelihood）为 -11315.95，部分 AIC 为 22639.90。
 - **重要变量和显著性**：
@@ -157,7 +157,7 @@ cph.fit(survival_pd_03, 'tenure', 'churn')
   - `techSupport_Yes`：HR = 0.53，表明使用技术支持服务的客户流失风险显著降低。
 - 绘制变量的置信区间：
 
-![](https://github.com/lelel-hue/STA323_Project1/blob/main/_image/HR_CI_1.png)
+![](https://github.com/lelel-hue/STA323_Project1/raw/main/_image/HR_CI_1.png)
 
 通过置信区间图可以看出，所有变量的风险比置信区间均未跨越 1，表明这些变量对流失风险的影响是统计显著的。
 
@@ -167,19 +167,19 @@ cph.fit(survival_pd_03, 'tenure', 'churn')
 
 - 方法一：统计检验
 
-<img src="https://github.com/lelel-hue/STA323_Project1/blob/main/_image/chi_square1.png" title="" alt="" width="286">
+<img src="https://github.com/lelel-hue/STA323_Project1/raw/main/_image/chi_square1.png" title="" alt="" width="286">
 
 就此模型而言，我们发现四个变量中有三个违反了比例风险假设。
 
 - 方法 2：Schoenfield 残差：利用图形输出来评估情况。
 
-![](https://github.com/lelel-hue/STA323_Project1/blob/main/_image/Schoenfield.png)
+![](https://github.com/lelel-hue/STA323_Project1/raw/main/_image/Schoenfield.png)
 
 Schoenfeld 残差图显示部分变量残差随时间变化不稳定，进一步验证了比例风险假设的违背。
 
 - 方法 3：Log-log Kaplan-Meier 图：基于Kaplan-Meier 曲线进行对数-对数变换
 
-![](https://github.com/lelel-hue/STA323_Project1/blob/main/_image/loglog_lm.png)
+![](https://github.com/lelel-hue/STA323_Project1/raw/main/_image/loglog_lm.png)
 
 Log-log 图的趋势分析表明，部分变量的分组间生存曲线未保持平行，进一步支持了假设违背的结论。除了 `internetService` 变量以外，大部分变量在 log(timeline) 值介于 1 和 3 之间时，Kaplan-Meier 曲线大体上是平行的；但当 log(timeline) 小于 1 或大于 3 时，这种平行关系开始减弱。
 
@@ -210,13 +210,13 @@ Log-log 图的趋势分析表明，部分变量的分组间生存曲线未保持
 
 - 模型系数图显示各变量对生存时间的影响
 
-![2025-04-10-03-54-48-image.png](https://github.com/lelel-hue/STA323_Project1/blob/main/_image/AFT.png)
+![2025-04-10-03-54-48-image.png](https://github.com/lelel-hue/STA323_Project1/raw/main/_image/AFT.png)
 
 **假设检验**：通过Kaplan-Meier方法绘制log-odds图验证模型假设
 
-![2025-04-10-03-54-16-image.png](https://github.com/lelel-hue/STA323_Project1/blob/main/_image/2025-04-10-03-54-16-image.png)
+![2025-04-10-03-54-16-image.png](https://github.com/lelel-hue/STA323_Project1/raw/main/_image/2025-04-10-03-54-16-image.png)
 
-![2025-04-10-03-54-01-image.png](https://github.com/lelel-hue/STA323_Project1/blob/main/_image/2025-04-10-03-54-01-image.png)
+![2025-04-10-03-54-01-image.png](https://github.com/lelel-hue/STA323_Project1/raw/main/_image/2025-04-10-03-54-01-image.png)
 
 ### （三）主要发现
 
@@ -241,7 +241,7 @@ Log-log 图的趋势分析表明，部分变量的分组间生存曲线未保持
    
    - 基于模型预测生存概率曲线
    
-   <img src="https://github.com/lelel-hue/STA323_Project1/blob/main/_image/1744271130584.jpg" title="" alt="1744271130584.jpg" width="407">
+   <img src="https://github.com/lelel-hue/STA323_Project1/raw/main/_image/1744271130584.jpg" title="" alt="1744271130584.jpg" width="407">
    
    - 假设每月利润为30单位，计算净现值(NPV)
 
@@ -250,7 +250,7 @@ Log-log 图的趋势分析表明，部分变量的分组间生存曲线未保持
    - 生成包含25个月详细数据的回收期表
    - 绘制关键时间点(12/24/36个月)的累计NPV柱状图
 
-<img src="https://github.com/lelel-hue/STA323_Project1/blob/main/_image/1744271137038.jpg" title="" alt="1744271137038.jpg" width="417">
+<img src="https://github.com/lelel-hue/STA323_Project1/raw/main/_image/1744271137038.jpg" title="" alt="1744271137038.jpg" width="417">
 
 ### （三）主要发现
 
